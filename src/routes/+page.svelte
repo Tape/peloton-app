@@ -37,6 +37,25 @@
   {/if}
   <input type="file" name="file" accept="text/csv" on:change={onChange} />
 {:else}
+  <h2>Stats</h2>
+  <p>Total classes taken: {report.stats.totalClasses}</p>
+  <p>Classes by discipline:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Discipline</th>
+        <th>Total Classes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each [...report.stats.totalClassesByDiscipline] as [discipline, totalClasses]}
+        <tr>
+          <td>{discipline}</td>
+          <td>{totalClasses}</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
   <h2>Classes Taken With Instructor</h2>
   <table>
     <thead>
