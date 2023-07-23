@@ -39,3 +39,15 @@ td {
 th {
   background: #161b22;
 }
+
+.grid {
+  display: grid;
+}
+
+.grid-2 {
+  grid-template-columns: 50% 50%;
+}
+
+.col {
+
+}

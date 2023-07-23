@@ -35,7 +35,7 @@
       minutes && `${minutes} ${pluralize("minute", "minutes", minutes)}`,
     ];
 
-    return parts.filter(part => !!part).join(", ");
+    return parts.filter((part) => !!part).join(", ");
   };
 </script>
 
@@ -55,43 +55,48 @@
 {:else}
   <h2>Stats</h2>
 
-  <p>Total classes taken: {report.stats.totalClasses}</p>
-  <p>Classes by discipline:</p>
-  <table>
-    <thead>
-      <tr>
-        <th>Discipline</th>
-        <th>Total Classes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each [...report.stats.totalClassesByDiscipline] as [discipline, totalClasses]}
-        <tr>
-          <td>{discipline}</td>
-          <td>{totalClasses}</td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
-
-  <p>Total workout time: {toHoursAndMinutes(report.stats.totalWorkoutTime)}</p>
-  <p>Workout time by discipline:</p>
-  <table>
-    <thead>
-    <tr>
-      <th>Discipline</th>
-      <th>Workout Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    {#each [...report.stats.totalWorkoutTimeByDiscipline] as [discipline, workoutTime]}
-      <tr>
-        <td>{discipline}</td>
-        <td>{toHoursAndMinutes(workoutTime)}</td>
-      </tr>
-    {/each}
-    </tbody>
-  </table>
+  <div class="grid grid-2">
+    <div class="col">
+      <p>Total classes taken: {report.stats.totalClasses}</p>
+      <p>Classes by discipline:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Discipline</th>
+            <th>Total Classes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each [...report.stats.totalClassesByDiscipline] as [discipline, totalClasses]}
+            <tr>
+              <td>{discipline}</td>
+              <td>{totalClasses}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <p>Total workout time: {toHoursAndMinutes(report.stats.totalWorkoutTime)}</p>
+      <p>Workout time by discipline:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Discipline</th>
+            <th>Workout Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each [...report.stats.totalWorkoutTimeByDiscipline] as [discipline, workoutTime]}
+            <tr>
+              <td>{discipline}</td>
+              <td>{toHoursAndMinutes(workoutTime)}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <h2>Classes Taken With Instructor</h2>
   <table>
