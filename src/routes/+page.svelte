@@ -64,11 +64,11 @@
       </tr>
     </thead>
     <tbody>
-      {#each [...report.stats.totalClassesByDiscipline] as [discipline, totalClasses]}
+      {#each [...report.stats.totalByDiscipline] as [discipline, { classes, time }]}
         <tr>
           <td>{discipline}</td>
-          <td>{totalClasses}</td>
-          <td>{toHoursAndMinutes(report.stats.totalWorkoutTimeByDiscipline.get(discipline))}</td>
+          <td>{classes}</td>
+          <td>{toHoursAndMinutes(time)}</td>
         </tr>
       {/each}
     </tbody>
