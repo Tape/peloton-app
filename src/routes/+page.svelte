@@ -5,9 +5,9 @@
   let report: Report;
   let error: string;
 
-  const onChange = (event) => {
-    const files = event.target.files;
-    if (!files.length) {
+  const onChange = (event: Event) => {
+    const files = (event.target as HTMLInputElement).files;
+    if (!files?.length) {
       error = "No files selected";
       return;
     }
@@ -22,11 +22,11 @@
     });
   };
 
-  const pluralize = (singular, plural, value) => {
+  const pluralize = (singular: string, plural: string, value: number) => {
     return value == 1 ? singular : plural;
   };
 
-  const toHoursAndMinutes = (value) => {
+  const toHoursAndMinutes = (value: number) => {
     const hours = Math.floor(value / 60);
     const minutes = value % 60;
 
