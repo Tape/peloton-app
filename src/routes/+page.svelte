@@ -1,6 +1,7 @@
 <script lang="ts">
   import { parseCsv } from "$lib/peloton/parser";
   import { type Report, generateReport } from "$lib/peloton/report";
+  import StatsWidget from "$lib/components/StatsWidget.svelte";
 
   let report: Report;
   let error: string;
@@ -21,22 +22,6 @@
       report = generateReport(result);
     });
   };
-
-  const pluralize = (singular: string, plural: string, value: number) => {
-    return value == 1 ? singular : plural;
-  };
-
-  const toHoursAndMinutes = (value: number) => {
-    const hours = Math.floor(value / 60);
-    const minutes = value % 60;
-
-    const parts = [
-      hours && `${hours} ${pluralize("hour", "hours", hours)}`,
-      minutes && `${minutes} ${pluralize("minute", "minutes", minutes)}`,
-    ];
-
-    return parts.filter((part) => !!part).join(", ");
-  };
 </script>
 
 <svelte:head>
@@ -53,34 +38,7 @@
   {/if}
   <input type="file" name="file" accept="text/csv" on:change={onChange} />
 {:else}
-  <h2>Stats</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Discipline</th>
-        <th>Total Classes</th>
-        <th>Workout Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each [...report.stats.totalByDiscipline] as [discipline, { classes, time }]}
-        <tr>
-          <td>{discipline}</td>
-          <td>{classes}</td>
-          <td>{toHoursAndMinutes(time)}</td>
-        </tr>
-      {/each}
-    </tbody>
-    <tfoot>
-      <tr>
-        <th>Total</th>
-        <th>{report.stats.totalClasses}</th>
-        <th>{toHoursAndMinutes(report.stats.totalWorkoutTime)}</th>
-      </tr>
-    </tfoot>
-  </table>
-
+  <StatsWidget stats={report.stats} />
   <h2>Classes Taken With Instructor</h2>
   <table>
     <thead>
