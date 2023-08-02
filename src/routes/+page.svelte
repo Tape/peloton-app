@@ -2,6 +2,7 @@
   import { parseCsv } from "$lib/peloton/parser";
   import { type Report, generateReport } from "$lib/peloton/report";
   import StatsWidget from "$lib/components/StatsWidget.svelte";
+  import InstructorsWidget from "$lib/components/InstructorsWidget.svelte";
 
   let report: Report;
   let error: string;
@@ -38,24 +39,11 @@
   {/if}
   <input type="file" name="file" accept="text/csv" on:change={onChange} />
 {:else}
+  <h2>Stats</h2>
   <StatsWidget stats={report.stats} />
+
   <h2>Classes Taken With Instructor</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Instructor</th>
-        <th>Classes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each [...report.instructors] as [instructor, classCount]}
-        <tr>
-          <td>{instructor}</td>
-          <td>{classCount}</td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+  <InstructorsWidget instructors={report.instructors} />
 {/if}
 
 <style>

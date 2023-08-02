@@ -5,8 +5,6 @@
   export let stats: Stats;
 </script>
 
-<h2>Stats</h2>
-
 <table>
   <thead>
     <tr>
