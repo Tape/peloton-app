@@ -1,7 +1,7 @@
 import { render, within } from "@testing-library/svelte";
 import { describe, expect, it } from "vitest";
 import type { Instructors } from "$lib/peloton/instructors";
-import InstructorsWidget from "$lib/components/InstructorsWidget.svelte";
+import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
 
 describe("<StatsWidget />", () => {
   const mockInstructors: Instructors = new Map([
@@ -16,10 +16,10 @@ describe("<StatsWidget />", () => {
       },
     });
 
-    const noInstructorRow = getByText("No Instructor").closest("tr")!!;
+    const noInstructorRow = getByText("No Instructor").closest("tr")!;
     expect(within(noInstructorRow).getByText("1")).toBeInTheDocument();
 
-    const mattWilpersRow = getByText("Matt Wilpers").closest("tr")!!;
+    const mattWilpersRow = getByText("Matt Wilpers").closest("tr")!;
     expect(within(mattWilpersRow).getByText("2")).toBeInTheDocument();
   });
 });

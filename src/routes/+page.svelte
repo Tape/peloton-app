@@ -1,8 +1,8 @@
 <script lang="ts">
   import { parseCsv } from "$lib/peloton/parser";
   import { type Report, generateReport } from "$lib/peloton/report";
-  import StatsWidget from "$lib/components/StatsWidget.svelte";
-  import InstructorsWidget from "$lib/components/InstructorsWidget.svelte";
+  import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
+  import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
 
   let report: Report;
   let error: string;

@@ -1,6 +1,6 @@
 import { render, within } from "@testing-library/svelte";
 import { describe, expect, it } from "vitest";
-import StatsWidget from "$lib/components/StatsWidget.svelte";
+import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
 import type { Stats } from "$lib/peloton/stats";
 
 describe("<StatsWidget />", () => {
