@@ -21,7 +21,7 @@ export default class DataWrapper<T extends Row> {
   private static readonly DEFAULT_SORT_DIRECTION: SortDirection = "asc";
 
   private readonly rawData: T[];
-  private sortedData: Writable<T[]>;
+  private readonly sortedData: Writable<T[]>;
   private sortField?: Field<T>;
   private sortDirection: SortDirection = DataWrapper.DEFAULT_SORT_DIRECTION;
 
