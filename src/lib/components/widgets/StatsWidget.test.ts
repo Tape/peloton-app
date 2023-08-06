@@ -4,26 +4,18 @@ import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
 import type { Stats } from "$lib/peloton/stats";
 
 describe("<StatsWidget />", () => {
-  const mockStats: Stats = {
-    totalByDiscipline: new Map([
-      [
-        "Cycling",
-        {
-          classes: 2,
-          time: 45,
-        },
-      ],
-      [
-        "Stretching",
-        {
-          classes: 1,
-          time: 20,
-        },
-      ],
-    ]),
-    totalClasses: 3,
-    totalWorkoutTime: 55,
-  };
+  const mockStats: Stats = [
+    {
+      classes: 2,
+      discipline: "Cycling",
+      time: 45,
+    },
+    {
+      classes: 1,
+      discipline: "Stretching",
+      time: 20,
+    },
+  ];
 
   it("Should render a table with the given stats property", () => {
     const { getByText } = render(StatsWidget, {

@@ -10,14 +10,10 @@ describe("stats", () => {
         ["Column 1", "Column 2", "Column 3", "15", "Stretching"],
       ];
 
-      expect(aggregate(csvData).totalClasses).toEqual(3);
-      expect(aggregate(csvData).totalWorkoutTime).toEqual(90);
-      expect(aggregate(csvData).totalByDiscipline).toEqual(
-        new Map([
-          ["Cycling", { classes: 1, time: 30 }],
-          ["Stretching", { classes: 2, time: 60 }],
-        ]),
-      );
+      expect(aggregate(csvData)).toMatchObject([
+        { classes: 2, discipline: "Stretching", time: 60 },
+        { classes: 1, discipline: "Cycling", time: 30 },
+      ]);
     });
   });
 });

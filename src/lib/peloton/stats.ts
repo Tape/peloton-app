@@ -1,38 +1,29 @@
-type DisciplineTotal = {
+type StatEntry = {
   classes: number;
+  discipline: string;
   time: number;
 };
 
-export type Stats = {
-  totalByDiscipline: Map<string, DisciplineTotal>;
-  totalClasses: number;
-  totalWorkoutTime: number;
-};
+export type Stats = StatEntry[];
 
 export const aggregate = (csvData: string[][]): Stats => {
-  const stats: Stats = {
-    totalByDiscipline: new Map(),
-    totalClasses: 0,
-    totalWorkoutTime: 0,
-  };
+  const disciplineMap = new Map<string, StatEntry>();
 
   csvData.forEach((row) => {
     const discipline = row[4];
     const workoutLength = +row[3];
 
-    stats.totalClasses += 1;
-    stats.totalWorkoutTime += workoutLength;
-
-    const disciplineTotal = stats.totalByDiscipline.get(discipline) || {
+    const statEntry = disciplineMap.get(discipline) || {
       classes: 0,
+      discipline,
       time: 0,
     };
 
-    disciplineTotal.classes += 1;
-    disciplineTotal.time += workoutLength;
+    statEntry.classes += 1;
+    statEntry.time += workoutLength;
 
-    stats.totalByDiscipline.set(discipline, disciplineTotal);
+    disciplineMap.set(discipline, statEntry);
   });
 
-  return stats;
+  return [...disciplineMap.values()];
 };

@@ -2,19 +2,14 @@
   import DataWrapper from "$lib/data/data-wrapper";
   import type { Stats } from "$lib/peloton/stats";
   import { toHoursAndMinutes } from "$lib/util/format";
+  import { sumOf } from "$lib/util/math";
 
   export let stats: Stats;
 
-  const buildWrapper = () => {
-    const data = [...stats.totalByDiscipline]
-      .map(([discipline, { classes, time }]) =>
-        ({ classes, discipline, time }));
-
-    return new DataWrapper(data);
-  };
-
-  const wrapper = buildWrapper();
+  const wrapper = new DataWrapper(stats);
   const rows = wrapper.getRows();
+
+  const { classes: totalClasses, time: totalTime } = sumOf(stats, "classes", "time");
 </script>
 
 <table>
@@ -37,8 +32,8 @@
   <tfoot>
     <tr>
       <th>Total</th>
-      <th>{stats.totalClasses}</th>
-      <th>{toHoursAndMinutes(stats.totalWorkoutTime)}</th>
+      <th>{totalClasses}</th>
+      <th>{toHoursAndMinutes(totalTime)}</th>
     </tr>
   </tfoot>
 </table>
