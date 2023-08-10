@@ -1,7 +1,7 @@
 <script lang="ts">
   import { parseCsv } from "$lib/peloton/parser";
   import { generateReport } from "$lib/peloton/report";
-  import { setReport } from "$lib/data/report-store";
+  import { report } from "$lib/stores";
   import "../app.css";
 
   let error: string;
@@ -20,7 +20,7 @@
     }
 
     parseCsv(files[0], (result) => {
-      setReport(generateReport(result));
+      $report = generateReport(result);
     });
   };
 </script>

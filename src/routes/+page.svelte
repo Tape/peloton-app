@@ -1,9 +1,7 @@
 <script lang="ts">
   import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
   import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
-  import { getReport } from "$lib/data/report-store";
-
-  const report = getReport();
+  import { report } from "$lib/stores";
 </script>
 
 <svelte:head>
