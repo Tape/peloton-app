@@ -1,5 +1,6 @@
-import { buildReportStore } from "./report";
 import type { Writable } from "svelte/store";
 import type { Report } from "$lib/peloton/report";
+import { writable } from "svelte/store";
 
-export const report: Writable<Report> = buildReportStore();
+export const error: Writable<string> = writable();
+export const report: Writable<Report> = writable();
