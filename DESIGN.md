@@ -3,7 +3,7 @@
 ## UI/UX
 
 Below is a simple outline for the design of the page, aspirationally. More detail can be added in the form of mockups at
-to be added at a later date.
+to be added at a later date. Mockups are currently being created in Penpot.
 
 - Header
   - Home
