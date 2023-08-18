@@ -4,6 +4,10 @@
   import "../app.css";
 </script>
 
+<svelte:head>
+  <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet" />
+</svelte:head>
+
 <Header />
 <main>
   {#if $error}

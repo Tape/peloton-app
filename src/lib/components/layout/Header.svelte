@@ -2,6 +2,7 @@
   import { parseCsv } from "$lib/peloton/parser";
   import { error, report } from "$lib/stores";
   import { generateReport } from "$lib/peloton/report";
+  import Button from "$lib/components/foundation/Button.svelte";
 
   let uploadInput: HTMLInputElement;
 
@@ -24,9 +25,35 @@
 </script>
 
 <header>
-  <nav>
+  <div class="logo">
     <a href="/">Peloton Stats</a>
-    <button type="button" on:click={() => uploadInput.click()}>Upload</button>
-    <input type="file" name="file" accept="text/csv" hidden bind:this={uploadInput} on:change={onFileUpload} />
+  </div>
+  <nav>
+    <div class="actions">
+      <Button class="upload" type="button" on:click={() => uploadInput.click()}>Upload</Button>
+      <input type="file" name="file" accept="text/csv" hidden bind:this={uploadInput} on:change={onFileUpload} />
+    </div>
   </nav>
 </header>
+
+<style>
+  header {
+    width: 100%;
+    height: 100px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .actions :global(.upload) {
+    padding: 0.75rem 1.5rem;
+  }
+</style>
