@@ -1,4 +1,4 @@
-export type Instructors = Map<String, number>;
+export type Instructors = Map<string, number>;
 
 export const aggregate = (csvData: string[][]): Instructors => {
   return csvData.reduce((instructors, row) => {

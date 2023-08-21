@@ -24,11 +24,11 @@ describe("<StatsWidget />", () => {
       },
     });
 
-    const cyclingRow = getByText("Cycling").closest("tr")!!;
+    const cyclingRow = getByText("Cycling").closest("tr")!;
     expect(within(cyclingRow).getByText("2")).toBeInTheDocument();
     expect(within(cyclingRow).getByText("45 minutes")).toBeInTheDocument();
 
-    const stretchingRow = getByText("Stretching").closest("tr")!!;
+    const stretchingRow = getByText("Stretching").closest("tr")!;
     expect(within(stretchingRow).getByText("1")).toBeInTheDocument();
     expect(within(stretchingRow).getByText("20 minutes")).toBeInTheDocument();
   });

@@ -1,14 +1,8 @@
 import { type Readable, writable, type Writable } from "svelte/store";
 
-export type Row = {
-  [key: string]: any;
-};
-
-type Field<Row> = keyof Row;
-
 type SortDirection = "asc" | "desc";
 
-const defaultSortFn = (a: any, b: any): number => {
+const defaultSortFn = <T>(a: T, b: T): number => {
   if (a > b) {
     return 1;
   } else if (a < b) {
@@ -17,12 +11,12 @@ const defaultSortFn = (a: any, b: any): number => {
   return 0;
 };
 
-export default class DataWrapper<T extends Row> {
+export default class DataWrapper<T extends object> {
   private static readonly DEFAULT_SORT_DIRECTION: SortDirection = "asc";
 
   private readonly rawData: T[];
   private readonly sortedData: Writable<T[]>;
-  private sortField?: Field<T>;
+  private sortField?: keyof T;
   private sortDirection: SortDirection = DataWrapper.DEFAULT_SORT_DIRECTION;
 
   public constructor(data: T[]) {
@@ -30,7 +24,7 @@ export default class DataWrapper<T extends Row> {
     this.sortedData = writable(data);
   }
 
-  public sort(field: Field<T>) {
+  public sort(field: keyof T) {
     if (this.sortField !== field) {
       this.sortField = field;
       this.sortDirection = DataWrapper.DEFAULT_SORT_DIRECTION;
@@ -56,7 +50,7 @@ export default class DataWrapper<T extends Row> {
     }
 
     const sortValue = this.sortDirection == "asc" ? 1 : -1;
-    const sortedData = [...this.rawData].sort((a: T, b: T) => {
+    const sortedData = [...this.rawData].sort((a, b) => {
       return sortValue * defaultSortFn(a[this.sortField!], b[this.sortField!]);
     });
     this.sortedData.set(sortedData);
