@@ -1,4 +1,4 @@
-type StatEntry = {
+export type StatEntry = {
   classes: number;
   discipline: string;
   time: number;

@@ -1,7 +1,13 @@
 <script lang="ts">
+  import Button from "$lib/components/foundation/Button.svelte";
   import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
   import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
+  import type { StatEntry } from "$lib/peloton/stats";
   import { report } from "$lib/stores";
+
+  $: disciplines = $report?.stats
+    .map((entry: StatEntry) => entry.discipline)
+    .sort((a: string, b: string) => a.localeCompare(b));
 </script>
 
 <svelte:head>
@@ -11,6 +17,14 @@
 <h1>Peloton Stats</h1>
 
 {#if $report}
+  <ul class="disciplines">
+    {#each disciplines as discipline}
+      <li>
+        <Button>{discipline}</Button>
+      </li>
+    {/each}
+  </ul>
+
   <h2>Stats</h2>
   <StatsWidget stats={$report.stats} />
 
@@ -19,3 +33,13 @@
 {:else}
   <p>Use the uploader above to upload your workout history.</p>
 {/if}
+
+<style>
+  .disciplines {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
