@@ -6,10 +6,9 @@
 
   export let stats: Stats;
 
-  const wrapper = new DataWrapper(stats);
-  const rows = wrapper.getRows();
-
-  const { classes: totalClasses, time: totalTime } = sumOf(stats, "classes", "time");
+  $: wrapper = new DataWrapper(stats);
+  $: rows = wrapper.getRows();
+  $: totals = sumOf(stats, "classes", "time");
 </script>
 
 <table>
@@ -32,8 +31,8 @@
   <tfoot>
     <tr>
       <th>Total</th>
-      <th>{totalClasses}</th>
-      <th>{toHoursAndMinutes(totalTime)}</th>
+      <th>{totals.classes}</th>
+      <th>{toHoursAndMinutes(totals.time)}</th>
     </tr>
   </tfoot>
 </table>
