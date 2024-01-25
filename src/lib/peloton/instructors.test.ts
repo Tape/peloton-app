@@ -10,12 +10,10 @@ describe("instructors", () => {
         ["Column 1", "Column 2", "Instructor 1"],
       ];
 
-      expect(aggregate(csvData)).toEqual(
-        new Map([
-          ["Instructor 1", 2],
-          ["Instructor 2", 1],
-        ]),
-      );
+      expect(aggregate(csvData)).toEqual([
+        { name: "Instructor 1", classes: 2 },
+        { name: "Instructor 2", classes: 1 },
+      ]);
     });
 
     it("should bucket empty instructor names under 'no instructor'", () => {
@@ -25,12 +23,10 @@ describe("instructors", () => {
         ["Column 1", "Column 2", ""],
       ];
 
-      expect(aggregate(csvData)).toEqual(
-        new Map([
-          ["Instructor 1", 1],
-          ["No Instructor", 2],
-        ]),
-      );
+      expect(aggregate(csvData)).toEqual([
+        { name: "Instructor 1", classes: 1 },
+        { name: "No Instructor", classes: 2 },
+      ]);
     });
   });
 });

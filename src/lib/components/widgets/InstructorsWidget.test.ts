@@ -3,11 +3,11 @@ import { describe, expect, it } from "vitest";
 import type { Instructors } from "$lib/peloton/instructors";
 import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
 
-describe("<StatsWidget />", () => {
-  const mockInstructors: Instructors = new Map([
-    ["No Instructor", 1],
-    ["Matt Wilpers", 2],
-  ]);
+describe("<InstructorsWidget />", () => {
+  const mockInstructors: Instructors = [
+    { name: "No Instructor", classes: 1 },
+    { name: "Matt Wilpers", classes: 2 },
+  ];
 
   it("Should render a table with the instructor and classes taken", () => {
     const { getByText } = render(InstructorsWidget, {
