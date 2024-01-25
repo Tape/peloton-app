@@ -2,25 +2,24 @@
   import Button from "$lib/components/foundation/Button.svelte";
   import StatsWidget from "$lib/components/widgets/StatsWidget.svelte";
   import InstructorsWidget from "$lib/components/widgets/InstructorsWidget.svelte";
-  import type { StatEntry } from "$lib/peloton/stats";
   import { report } from "$lib/stores";
 
-  $: disciplines = $report?.stats
-    .map((entry: StatEntry) => entry.discipline)
-    .sort((a: string, b: string) => a.localeCompare(b));
+  $: disciplines = report.disciplines();
 </script>
 
 <svelte:head>
   <title>Peloton Stats</title>
 </svelte:head>
 
-<h1>Peloton Stats</h1>
-
 {#if $report}
+  <p>
+    <Button on:click={() => report.clearFilters()}>Clear Filters</Button>
+  </p>
+
   <ul class="disciplines">
-    {#each disciplines as discipline}
+    {#each $disciplines as discipline}
       <li>
-        <Button>{discipline}</Button>
+        <Button on:click={() => report.setFilters({ discipline })}>{discipline}</Button>
       </li>
     {/each}
   </ul>

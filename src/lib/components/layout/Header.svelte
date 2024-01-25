@@ -1,7 +1,6 @@
 <script lang="ts">
   import { parseCsv } from "$lib/peloton/parser";
   import { error, report } from "$lib/stores";
-  import { generateReport } from "$lib/peloton/report";
   import Button from "$lib/components/foundation/Button.svelte";
 
   let uploadInput: HTMLInputElement;
@@ -18,8 +17,9 @@
       return;
     }
 
-    parseCsv(files[0], (result) => {
-      $report = generateReport(result);
+    parseCsv(files[0], result => {
+      report.setData(result);
+      report.clearFilters();
     });
   };
 </script>
